@@ -4,6 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { StoreModule } from '@ngrx/store';
 
+import { BackendErrorMessagesModule } from './../shared/modules/backend-error-messages/backend-error-messages.modules';
 import { RegisterComponent } from './components/register/register.component';
 import { authReducer } from './store/reducers';
 
@@ -17,6 +18,7 @@ const routes = [
 @NgModule({
   imports: [
     CommonModule,
+    BackendErrorMessagesModule,
     ReactiveFormsModule,
     RouterModule.forChild(routes),
     StoreModule.forFeature('auth', authReducer),

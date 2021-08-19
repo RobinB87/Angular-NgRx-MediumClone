@@ -8,9 +8,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { AuthModule } from './auth/auth.module';
+import { BackendErrorMessagesComponent } from './app/shared/modules/backend-error-messages/components/backend-error-messages/backend-error-messages.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, BackendErrorMessagesComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
