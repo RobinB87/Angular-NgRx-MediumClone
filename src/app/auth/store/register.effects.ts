@@ -19,22 +19,24 @@ export class RegisterEffect {
     private router: Router
   ) {}
 
-  register$ = createEffect(() => {
-    return this.actions$.pipe(
+  register$ = createEffect(() =>
+    this.actions$.pipe(
       ofType(registerAction),
-      switchMap(({ request }) =>
-        this.authService.register(request).pipe(
+      switchMap(({ request }) => {
+        return this.authService.register(request).pipe(
           map((currentUser: CurrentUser) => {
+            console.log(currentUser);
             this.persistenceService.set('accessToken', currentUser.token);
             return registerSuccess({ currentUser });
           }),
-          catchError((errorResponse: HttpErrorResponse) =>
-            of(registerFail({ errors: errorResponse.error.errors }))
-          )
-        )
-      )
-    );
-  });
+
+          catchError((errorResponse: HttpErrorResponse) => {
+            return of(registerFail({ errors: errorResponse.error.errors }));
+          })
+        );
+      })
+    )
+  );
 
   redirectAfterSubmit$ = createEffect(
     () =>

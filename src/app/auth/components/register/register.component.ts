@@ -23,7 +23,7 @@ export class RegisterComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private store: Store) {
     this.form = this.fb.group({
-      userName: ['', Validators.required],
+      username: ['', Validators.required],
       email: ['', Validators.required],
       password: ['', Validators.required],
     });
@@ -35,7 +35,10 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit(): void {
-    const request: RegisterRequest = this.form.value;
+    const request: RegisterRequest = {
+      user: this.form.value,
+    };
+
     console.log('submit', request, this.form.valid);
 
     this.store.dispatch(registerAction({ request }));
