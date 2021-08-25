@@ -1,10 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 import { BackendErrors } from '../../../shared/types/backend-errors';
-import { validationErrorsSelector } from '../../store/selectors';
+import {
+  isSubmittingSelector,
+  validationErrorsSelector,
+} from '../../store/selectors';
+import { RegisterRequest } from '../../types/register-request';
 import { registerAction } from './../../store/actions';
 
 @Component({
@@ -14,6 +18,7 @@ import { registerAction } from './../../store/actions';
 })
 export class RegisterComponent implements OnInit {
   form: FormGroup;
+  isSubmitting$!: Observable<boolean>;
   backendErrors$!: Observable<BackendErrors | null>;
 
   constructor(private fb: FormBuilder, private store: Store) {
@@ -25,11 +30,14 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.backendErrors$ = this.store.select(validationErrorsSelector);
+    this.isSubmitting$ = this.store.pipe(select(isSubmittingSelector));
+    this.backendErrors$ = this.store.pipe(select(validationErrorsSelector));
   }
 
   onSubmit(): void {
-    console.log('submit', this.form.value);
-    this.store.dispatch(registerAction(this.form.value));
+    const request: RegisterRequest = this.form.value;
+    console.log('submit', request, this.form.valid);
+
+    this.store.dispatch(registerAction({ request }));
   }
 }
