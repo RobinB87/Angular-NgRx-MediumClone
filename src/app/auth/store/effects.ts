@@ -5,13 +5,20 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { of } from 'rxjs';
 
 import { AuthService } from '../auth.service';
-import { registerAction, registerFail, registerSuccess } from './actions';
+import {
+  loginAction,
+  loginFail,
+  loginSuccess,
+  registerAction,
+  registerFail,
+  registerSuccess,
+} from './actions';
 import { CurrentUser } from '../../shared/types/current-user';
 import { Router } from '@angular/router';
-import { PersistenceService } from './../../shared/services/persistence.service';
+import { PersistenceService } from '../../shared/services/persistence.service';
 
 @Injectable()
-export class RegisterEffect {
+export class AuthEffects {
   constructor(
     private actions$: Actions,
     private authService: AuthService,
@@ -25,7 +32,6 @@ export class RegisterEffect {
       switchMap(({ request }) => {
         return this.authService.register(request).pipe(
           map((currentUser: CurrentUser) => {
-            console.log(currentUser);
             this.persistenceService.set('accessToken', currentUser.token);
             return registerSuccess({ currentUser });
           }),
@@ -42,6 +48,35 @@ export class RegisterEffect {
     () =>
       this.actions$.pipe(
         ofType(registerSuccess),
+        tap(() => {
+          this.router.navigateByUrl('/');
+        })
+      ),
+    { dispatch: false }
+  );
+
+  login$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(loginAction),
+      switchMap(({ request }) => {
+        return this.authService.login(request).pipe(
+          map((currentUser: CurrentUser) => {
+            this.persistenceService.set('accessToken', currentUser.token);
+            return loginSuccess({ currentUser });
+          }),
+
+          catchError((errorResponse: HttpErrorResponse) => {
+            return of(loginFail({ errors: errorResponse.error.errors }));
+          })
+        );
+      })
+    )
+  );
+
+  redirectAfterLogin$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(loginSuccess),
         tap(() => {
           this.router.navigateByUrl('/');
         })

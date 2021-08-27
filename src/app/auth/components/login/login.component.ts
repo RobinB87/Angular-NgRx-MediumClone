@@ -2,21 +2,20 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-
 import { BackendErrors } from '../../../shared/types/backend-errors';
+import { loginAction } from '../../store/actions';
 import {
   isSubmittingSelector,
   validationErrorsSelector,
 } from '../../store/selectors';
-import { RegisterRequest } from '../../types/register-request';
-import { registerAction } from './../../store/actions';
+import { LoginRequest } from '../../types/login-request';
 
 @Component({
-  selector: 'mc-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss'],
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss'],
 })
-export class RegisterComponent implements OnInit {
+export class LoginComponent implements OnInit {
   form!: FormGroup;
   isSubmitting$!: Observable<boolean>;
   backendErrors$!: Observable<BackendErrors | null>;
@@ -31,17 +30,16 @@ export class RegisterComponent implements OnInit {
 
   initializeForm(): void {
     this.form = this.fb.group({
-      username: ['', Validators.required],
       email: ['', Validators.required],
       password: ['', Validators.required],
     });
   }
 
   onSubmit(): void {
-    const request: RegisterRequest = {
+    const request: LoginRequest = {
       user: this.form.value,
     };
 
-    this.store.dispatch(registerAction({ request }));
+    this.store.dispatch(loginAction({ request }));
   }
 }
