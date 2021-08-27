@@ -21,7 +21,7 @@ export const isLoggedInSelector = createSelector(
   (authState: AuthState) => authState.isLoggedIn
 );
 
-export const isCurrentUserSelector = createSelector(
+export const getCurrentUserSelector = createSelector(
   authFeatureSelector,
   (authState: AuthState) => authState.currentUser
 );

@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 
 import { Observable } from 'rxjs';
 import {
-  isCurrentUserSelector,
+  getCurrentUserSelector,
   isLoggedInSelector,
 } from '../../../../../auth/store/selectors';
 import { CurrentUser } from './../../../../types/current-user';
@@ -21,6 +21,6 @@ export class TopBarComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLoggedIn$ = this.store.select(isLoggedInSelector);
-    this.currentUser$ = this.store.select(isCurrentUserSelector);
+    this.currentUser$ = this.store.select(getCurrentUserSelector);
   }
 }
