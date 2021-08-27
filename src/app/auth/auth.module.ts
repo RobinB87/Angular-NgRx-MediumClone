@@ -7,7 +7,7 @@ import { EffectsModule } from '@ngrx/effects';
 
 import { RegisterComponent } from './components/register/register.component';
 import { authReducer } from './store/reducers';
-import { AuthService } from './auth.service';
+import { AuthService } from './services/auth.service';
 import { PersistenceService } from './../shared/services/persistence.service';
 import { AuthEffects } from './store/effects';
 import { BackendErrorMessagesModule } from './../shared/modules/backend-error-messages/backend-error-messages.modules';

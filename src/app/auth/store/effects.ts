@@ -4,7 +4,7 @@ import { map, catchError, switchMap, tap } from 'rxjs/operators';
 import { HttpErrorResponse } from '@angular/common/http';
 import { of } from 'rxjs';
 
-import { AuthService } from '../auth.service';
+import { AuthService } from '../services/auth.service';
 import {
   loginAction,
   loginFail,
