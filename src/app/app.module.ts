@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
 import { AuthModule } from './auth/auth.module';
 import { HttpClientModule } from '@angular/common/http';
+import { TopBarModule } from './shared/modules/top-bar/topbar.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -24,6 +25,7 @@ import { HttpClientModule } from '@angular/common/http';
       logOnly: environment.production,
     }),
     EffectsModule.forRoot([]),
+    TopBarModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

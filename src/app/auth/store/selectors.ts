@@ -8,10 +8,20 @@ export const authFeatureSelector = createFeatureSelector<AppState, AuthState>(
 
 export const isSubmittingSelector = createSelector(
   authFeatureSelector,
-  (auth: AuthState) => auth.isSubmitting
+  (authState: AuthState) => authState.isSubmitting
 );
 
 export const validationErrorsSelector = createSelector(
   authFeatureSelector,
-  (auth: AuthState) => auth.validationErrors
+  (authState: AuthState) => authState.validationErrors
+);
+
+export const isLoggedInSelector = createSelector(
+  authFeatureSelector,
+  (authState: AuthState) => authState.isLoggedIn
+);
+
+export const isCurrentUserSelector = createSelector(
+  authFeatureSelector,
+  (authState: AuthState) => authState.currentUser
 );
