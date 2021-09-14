@@ -5,8 +5,9 @@ import {
   HttpRequest,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { PersistenceService } from '../../shared/services/persistence.service';
 import { Observable } from 'rxjs';
+
+import { PersistenceService } from './persistence.service';
 
 @Injectable({
   providedIn: 'root',

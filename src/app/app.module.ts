@@ -10,7 +10,7 @@ import { environment } from '../environments/environment';
 import { AuthModule } from './auth/auth.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TopBarModule } from './shared/modules/top-bar/topbar.module';
-import { AuthInterceptor } from './auth/services/auth-interceptor';
+import { AuthInterceptor } from './shared/services/auth-interceptor.service';
 
 @NgModule({
   declarations: [AppComponent],

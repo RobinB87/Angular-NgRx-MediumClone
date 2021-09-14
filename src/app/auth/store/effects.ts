@@ -99,7 +99,7 @@ export class AuthEffects {
             return getCurrentUserSuccess({ currentUser });
           }),
 
-          catchError((errorResponse: HttpErrorResponse) => {
+          catchError(() => {
             return of(getCurrentUserFail());
           })
         );
