@@ -3,13 +3,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
 import { AuthModule } from './auth/auth.module';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TopBarModule } from './shared/modules/top-bar/topbar.module';
+import { GlobalFeedModule } from './global-feed/global-feed.module';
 import { AuthInterceptor } from './shared/services/auth-interceptor.service';
 
 @NgModule({
@@ -27,6 +28,7 @@ import { AuthInterceptor } from './shared/services/auth-interceptor.service';
     }),
     EffectsModule.forRoot([]),
     TopBarModule,
+    GlobalFeedModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
