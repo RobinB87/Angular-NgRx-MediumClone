@@ -34,4 +34,9 @@ export class AuthService {
       map(this.getUser)
     );
   }
+
+  getCurrentUser(): Observable<CurrentUser> {
+    const url = environment.apiUrl + '/user';
+    return this.http.get<CurrentUser>(url);
+  }
 }

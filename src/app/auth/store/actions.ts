@@ -34,3 +34,16 @@ export const loginFail = createAction(
   '[Login Api] Login Fail',
   props<{ errors: BackendErrors }>()
 );
+
+export const getCurrentUserAction = createAction(
+  '[Auth Page] Get Current User'
+);
+
+export const getCurrentUserSuccess = createAction(
+  '[Auth Api]  Get Current User Success',
+  props<{ currentUser: CurrentUser }>()
+);
+
+export const getCurrentUserFail = createAction(
+  '[Auth Api]  Get Current User Fail'
+);

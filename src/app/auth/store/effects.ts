@@ -6,6 +6,9 @@ import { of } from 'rxjs';
 
 import { AuthService } from '../services/auth.service';
 import {
+  getCurrentUserAction,
+  getCurrentUserFail,
+  getCurrentUserSuccess,
   loginAction,
   loginFail,
   loginSuccess,
@@ -82,5 +85,25 @@ export class AuthEffects {
         })
       ),
     { dispatch: false }
+  );
+
+  getCurrentUser$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(getCurrentUserAction),
+      switchMap(() => {
+        const token = this.persistenceService.get('accessToken');
+        if (!token) return of(getCurrentUserFail());
+
+        return this.authService.getCurrentUser().pipe(
+          map((currentUser: CurrentUser) => {
+            return getCurrentUserSuccess({ currentUser });
+          }),
+
+          catchError((errorResponse: HttpErrorResponse) => {
+            return of(getCurrentUserFail());
+          })
+        );
+      })
+    )
   );
 }

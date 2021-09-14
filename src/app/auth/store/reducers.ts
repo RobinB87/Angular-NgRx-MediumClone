@@ -1,6 +1,9 @@
 import { createReducer, on } from '@ngrx/store';
 import { AuthState } from '../types/auth-state';
 import {
+  getCurrentUserAction,
+  getCurrentUserFail,
+  getCurrentUserSuccess,
   loginAction,
   loginFail,
   loginSuccess,
@@ -11,6 +14,7 @@ import {
 
 const initialState: AuthState = {
   isSubmitting: false,
+  isLoading: false,
   currentUser: null,
   isLoggedIn: null,
   validationErrors: null,
@@ -70,6 +74,31 @@ export const authReducer = createReducer(
       currentUser: null,
       isLoggedIn: false,
       validationErrors: action.errors,
+    })
+  ),
+  on(
+    getCurrentUserAction,
+    (state): AuthState => ({
+      ...state,
+      isLoading: true,
+    })
+  ),
+  on(
+    getCurrentUserSuccess,
+    (state, action): AuthState => ({
+      ...state,
+      isLoading: false,
+      isLoggedIn: true,
+      currentUser: action.currentUser,
+    })
+  ),
+  on(
+    getCurrentUserFail,
+    (state, action): AuthState => ({
+      ...state,
+      isLoading: false,
+      isLoggedIn: false,
+      currentUser: null,
     })
   )
 );

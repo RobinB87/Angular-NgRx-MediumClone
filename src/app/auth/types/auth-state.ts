@@ -3,6 +3,7 @@ import { CurrentUser } from '../../shared/types/current-user';
 
 export interface AuthState {
   isSubmitting: boolean;
+  isLoading: boolean;
   currentUser: CurrentUser | null;
   isLoggedIn: boolean | null;
   validationErrors: BackendErrors | null;
