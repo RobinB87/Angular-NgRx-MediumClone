@@ -5,7 +5,7 @@ import { LoginRequest } from '../types/login-request';
 import { RegisterRequest } from '../types/register-request';
 import { CurrentUser } from './../../shared/types/current-user';
 
-export const registerAction = createAction(
+export const register = createAction(
   '[Register Page] Register',
   props<{ request: RegisterRequest }>()
 );
@@ -20,7 +20,7 @@ export const registerFail = createAction(
   props<{ errors: BackendErrors }>()
 );
 
-export const loginAction = createAction(
+export const login = createAction(
   '[Login Page] Login',
   props<{ request: LoginRequest }>()
 );
@@ -35,9 +35,7 @@ export const loginFail = createAction(
   props<{ errors: BackendErrors }>()
 );
 
-export const getCurrentUserAction = createAction(
-  '[Auth Page] Get Current User'
-);
+export const getCurrentUser = createAction('[Auth Page] Get Current User');
 
 export const getCurrentUserSuccess = createAction(
   '[Auth Api]  Get Current User Success',

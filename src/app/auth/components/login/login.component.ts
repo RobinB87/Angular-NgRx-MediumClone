@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { BackendErrors } from '../../../shared/types/backend-errors';
-import { loginAction } from '../../store/actions';
+import { login } from '../../store/actions';
 import {
   isSubmittingSelector,
   validationErrorsSelector,
@@ -40,6 +40,6 @@ export class LoginComponent implements OnInit {
       user: this.form.value,
     };
 
-    this.store.dispatch(loginAction({ request }));
+    this.store.dispatch(login({ request }));
   }
 }

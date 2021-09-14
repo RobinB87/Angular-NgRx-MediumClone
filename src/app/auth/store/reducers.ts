@@ -1,13 +1,13 @@
 import { createReducer, on } from '@ngrx/store';
 import { AuthState } from '../types/auth-state';
 import {
-  getCurrentUserAction,
+  getCurrentUser,
   getCurrentUserFail,
   getCurrentUserSuccess,
-  loginAction,
+  login,
   loginFail,
   loginSuccess,
-  registerAction,
+  register,
   registerFail,
   registerSuccess,
 } from './actions';
@@ -23,7 +23,7 @@ const initialState: AuthState = {
 export const authReducer = createReducer(
   initialState,
   on(
-    registerAction,
+    register,
     (state): AuthState => ({
       ...state,
       isSubmitting: true,
@@ -50,7 +50,7 @@ export const authReducer = createReducer(
     })
   ),
   on(
-    loginAction,
+    login,
     (state): AuthState => ({
       ...state,
       isSubmitting: true,
@@ -77,7 +77,7 @@ export const authReducer = createReducer(
     })
   ),
   on(
-    getCurrentUserAction,
+    getCurrentUser,
     (state): AuthState => ({
       ...state,
       isLoading: true,

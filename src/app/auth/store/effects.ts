@@ -6,13 +6,13 @@ import { of } from 'rxjs';
 
 import { AuthService } from '../services/auth.service';
 import {
-  getCurrentUserAction,
+  getCurrentUser,
   getCurrentUserFail,
   getCurrentUserSuccess,
-  loginAction,
+  login,
   loginFail,
   loginSuccess,
-  registerAction,
+  register,
   registerFail,
   registerSuccess,
 } from './actions';
@@ -31,7 +31,7 @@ export class AuthEffects {
 
   register$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(registerAction),
+      ofType(register),
       switchMap(({ request }) => {
         return this.authService.register(request).pipe(
           map((currentUser: CurrentUser) => {
@@ -60,7 +60,7 @@ export class AuthEffects {
 
   login$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(loginAction),
+      ofType(login),
       switchMap(({ request }) => {
         return this.authService.login(request).pipe(
           map((currentUser: CurrentUser) => {
@@ -89,7 +89,7 @@ export class AuthEffects {
 
   getCurrentUser$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(getCurrentUserAction),
+      ofType(getCurrentUser),
       switchMap(() => {
         const token = this.persistenceService.get('accessToken');
         if (!token) return of(getCurrentUserFail());

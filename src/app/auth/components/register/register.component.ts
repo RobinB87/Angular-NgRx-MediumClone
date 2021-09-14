@@ -9,7 +9,7 @@ import {
   validationErrorsSelector,
 } from '../../store/selectors';
 import { RegisterRequest } from '../../types/register-request';
-import { registerAction } from './../../store/actions';
+import { register } from './../../store/actions';
 
 @Component({
   selector: 'mc-register',
@@ -42,6 +42,6 @@ export class RegisterComponent implements OnInit {
       user: this.form.value,
     };
 
-    this.store.dispatch(registerAction({ request }));
+    this.store.dispatch(register({ request }));
   }
 }
